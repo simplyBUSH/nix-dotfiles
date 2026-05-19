@@ -6,7 +6,9 @@
     ./git.nix
     ./kitty.nix
     ./tmux.nix
+    ./nvim.nix
     ./aerospace.nix
+    ./iamb.nix
   ];
 
   home.username = "bush";
@@ -14,7 +16,6 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-    # CLI tools you want everywhere.
     ripgrep
     fd
     eza

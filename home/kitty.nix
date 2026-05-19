@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Install kitty but use our own config file.
   home.packages = with pkgs; [
     kitty
   ];

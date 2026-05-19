@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-
+{ pkgs, lib, ... }:
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;  # nix replaces the brew zsh-autosuggestions line
+    enableCompletion = false;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     history = {
@@ -18,38 +17,47 @@
       ll = "eza -lha --git";
       q = "exit";
       kys = "tmux kill-server";
-      iamb = "iamb -C ~/.config/";
       brewseek = "taproom";
       cls = "clear";
       size = "du -sh .";
       sout = "diskutil unmountDisk /dev/disk4 && sudo diskutil eject /dev/disk4";
-      # nix-darwin convenience
-      rebuild = "darwin-rebuild switch --flake ~/nix-config#glaceon";
     };
 
-    # Runs BEFORE most other zsh setup — brew shellenv has to be early
-    # because everything depends on the PATH it sets.
-    initExtraFirst = ''
-      # Homebrew
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        # ── Completion: cached compinit (regenerates daily) ──
+        autoload -Uz compinit
+        if [[ -n ''${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+          compinit
+        else
+          compinit -C
+        fi
 
-    # Runs after plugins/completions are set up.
-    initContent = ''
-      # Prompt: [bush@glaceon ~]%
-      PROMPT='[%n@%F{#bae2de}glaceon%f %~]%% '
+        # ── Homebrew (static, no `eval brew shellenv` subshell) ──
+        export HOMEBREW_PREFIX="/opt/homebrew"
+        export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+        export HOMEBREW_REPOSITORY="/opt/homebrew"
+        export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+        export MANPATH="/opt/homebrew/share/man:''${MANPATH:-}"
+        export INFOPATH="/opt/homebrew/share/info:''${INFOPATH:-}"
+        fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+      '')
+      ''
+        # Prompt: [bush@glaceon ~]%
+        PROMPT='[%n@%F{#bae2de}glaceon%f %~]%% '
 
-      # Tmux auto-attach (kitty launched with KITTY_TMUX env var)
-      if [[ -z "$TMUX" && -n "$KITTY_PID" && -n "$KITTY_TMUX" ]]; then
-          tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
-      fi
+        # Tmux auto-attach (kitty launched with KITTY_TMUX env var)
+        if [[ -z "$TMUX" && -n "$KITTY_PID" && -n "$KITTY_TMUX" ]]; then
+            tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
+        fi
 
-      # Java (Homebrew OpenJDK)
-      export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-      export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+        # Java (Homebrew OpenJDK)
+        export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+        export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
-      # Python 3.12 from Homebrew
-      export PATH="/opt/homebrew/opt/python@3.12/bin:$PATH"
-    '';
+        # Python 3.12 from Homebrew
+        export PATH="/opt/homebrew/opt/python@3.12/bin:$PATH"
+      ''
+    ];
   };
 }

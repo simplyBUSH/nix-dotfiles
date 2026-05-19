@@ -4,8 +4,8 @@
   programs.aerospace = {
     enable = true;
     launchd.enable = true;
-    userSettings = {
-      start-at-login = true;
+    settings = {
+      start-at-login = false;
 
       after-startup-command = [
         "exec-and-forget borders active_color=0xff4ca0b3 inactive_color=0x00000000 width=7.5"
