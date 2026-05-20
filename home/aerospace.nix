@@ -85,6 +85,7 @@
         alt-shift-m = "exec-and-forget open -a element";
         alt-shift-c = "exec-and-forget code";
         alt-shift-r = "reload-config";
+        alt-shift-s = "exec-and-forget open -a 'System Settings'";
       };
     };
   };

@@ -38,8 +38,7 @@
     };
 
     extraConfig = ''
-      clear_all_mouse_actions yes # comment out to reanable traffic lights
-
+      clear_all_mouse_actions yes
       mouse_map left click ungrabbed mouse_handle_click selection link prompt
       mouse_map left press ungrabbed mouse_selection normal
       mouse_map left doublepress ungrabbed mouse_selection word

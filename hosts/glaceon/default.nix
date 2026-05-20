@@ -19,7 +19,11 @@
   networking.hostName = "glaceon";
   networking.localHostName = "glaceon";
   networking.computerName = "glaceon";
-  security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true; 
+  };
+
 
   users.users.bush = {
     name = "bush";
@@ -85,6 +89,8 @@
       "skim"
       "vesktop"
       "visual-studio-code"
+      "mx-power-gadget"
+      "affinity"
      ];
     brews = [
       "felixkratz/formulae/borders"
@@ -93,6 +99,8 @@
       "openjdk"
       "python@3.12"
       "tailscale"
+      "python-matplotlib"
+      "matthart1983/tap/netwatch"
     ];
   };
 }
