@@ -17,10 +17,10 @@
       ll = "eza -lha --git";
       q = "exit";
       kys = "tmux kill-server";
-      brewseek = "taproom";
       cls = "clear";
       size = "du -sh .";
       sout = "diskutil unmountDisk /dev/disk4 && sudo diskutil eject /dev/disk4";
+      ts = "tailscale";
     };
 
     initContent = lib.mkMerge [

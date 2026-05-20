@@ -6,6 +6,7 @@
     git
     ollama
     stats
+    fastfetch
   ];
 
   nix.settings.experimental-features = "nix-command flakes";
@@ -18,6 +19,7 @@
   networking.hostName = "glaceon";
   networking.localHostName = "glaceon";
   networking.computerName = "glaceon";
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   users.users.bush = {
     name = "bush";
@@ -73,23 +75,24 @@
     ];
 
     casks = [
-      "firefox"
-      "raycast"
-      "linearmouse"
-      "vesktop"
-      "element"
-      "visual-studio-code"
-      "pearcleaner"
+      "affinity"
       "boring-notch"
+      "element"
+      "firefox"
+      "linearmouse"
+      "pearcleaner"
+      "raycast"
       "skim"
+      "vesktop"
+      "visual-studio-code"
      ];
     brews = [
+      "felixkratz/formulae/borders"
+      "gping"
+      "mosh"
       "openjdk"
       "python@3.12"
-      "felixkratz/formulae/borders"
-      "mosh"
       "tailscale"
-      "gping"
     ];
   };
 }
