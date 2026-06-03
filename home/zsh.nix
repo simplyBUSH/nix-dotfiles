@@ -18,26 +18,26 @@
     };
 
     shellAliases = {
-      ll = "eza -lha --git";
-      q = "exit";
-      kys = "tmux kill-server";
       cls = "clear";
+      iamb = "iamb -C ~/.config"; 
+      kys = "tmux kill-server";
+      ll = "eza -lha --git";
+      ns = "nix-shell";
+      q = "exit";
+      sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon";
       size = "du -sh .";
       sout = "diskutil unmountDisk /dev/disk4 && sudo diskutil eject /dev/disk4";
       ts = "tailscale";
-      ns = "nix-shell";
-      sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon";
-      iamb = "iamb -C ~/.config"; 
     };
     
     sessionVariables = {
-      HOMEBREW_PREFIX = "/opt/homebrew";
-      HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
-      HOMEBREW_REPOSITORY = "/opt/homebrew";
-      MANPATH = "/opt/homebrew/share/man:''${MANPATH:-}";
-      INFOPATH = "/opt/homebrew/share/info:''${INFOPATH:-}";
       CPPFLAGS = "-I/opt/homebrew/opt/openjdk/include";
-      PATH = "/opt/homebrew/opt/python@3.12/bin:/opt/homebrew/opt/openjdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH";
+      HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
+      HOMEBREW_PREFIX = "/opt/homebrew";
+      HOMEBREW_REPOSITORY = "/opt/homebrew";
+      INFOPATH = "/opt/homebrew/share/info:''${INFOPATH:-}";
+      MANPATH = "/opt/homebrew/share/man:''${MANPATH:-}";
+      PATH = "/opt/homebrew/opt/openjdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH";
     };
 
 

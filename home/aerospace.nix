@@ -35,8 +35,6 @@
 
       mode.main.binding = {
         # workspace switching
-        alt-tab = "workspace next";
-        alt-shift-tab = "workspace prev";
         alt-1 = "workspace 1";
         alt-2 = "workspace 2";
         alt-3 = "workspace 3";

@@ -2,11 +2,15 @@
 
 {
   environment.systemPackages = with pkgs; [
-    vim
+    fastfetch
+    ffmpeg
     git
     ollama
+    python313
     stats
-    fastfetch
+    uv
+    yazi
+    vim
   ];
 
   nix.settings.experimental-features = "nix-command flakes";
@@ -53,6 +57,7 @@
       show-recents = false;
       mru-spaces = false;
       tilesize = 42;
+      autohide-delay = 10.0;
     };
     finder = {
       AppleShowAllExtensions = true;
@@ -80,27 +85,29 @@
 
     casks = [
       "affinity"
+      "affinity"
       "boring-notch"
       "element"
       "firefox"
       "linearmouse"
+      "mx-power-gadget"
       "pearcleaner"
+      "prismlauncher"
       "raycast"
       "skim"
+      "spotify"
+      "steam"
       "vesktop"
       "visual-studio-code"
-      "mx-power-gadget"
-      "affinity"
+      "x2goclient"
      ];
     brews = [
       "felixkratz/formulae/borders"
       "gping"
+      "matthart1983/tap/netwatch"
       "mosh"
       "openjdk"
-      "python@3.12"
       "tailscale"
-      "python-matplotlib"
-      "matthart1983/tap/netwatch"
     ];
   };
 }
