@@ -23,7 +23,7 @@ lazy.setup({
             return require("codecompanion.adapters").extend("ollama", {
               schema = {
                 model = {
-                  default = "qwen3.5-coder:2b",
+                  default = "qwen3.5-coder:4b",
                 },
               },
             })

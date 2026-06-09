@@ -28,6 +28,8 @@
       size = "du -sh .";
       sout = "diskutil unmountDisk /dev/disk4 && sudo diskutil eject /dev/disk4";
       ts = "tailscale";
+      vi = "nvim";
+      vim = "nvim";
     };
     
     sessionVariables = {

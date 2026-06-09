@@ -3,14 +3,16 @@
 {
   environment.systemPackages = with pkgs; [
     fastfetch
+    mosh
+    gping
     ffmpeg
     git
     ollama
     python313
+    speedtest-cli
     stats
     uv
     yazi
-    vim
   ];
 
   nix.settings.experimental-features = "nix-command flakes";
@@ -76,8 +78,9 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      cleanup = "zap";
+      cleanup = "uninstall";
       upgrade = true;
+      extraFlags = [ "--force" ];
     };
     taps = [
     "TheBoredTeam/boring-notch"
@@ -85,29 +88,24 @@
 
     casks = [
       "affinity"
-      "affinity"
       "boring-notch"
       "element"
       "firefox"
       "linearmouse"
       "mx-power-gadget"
       "pearcleaner"
-      "prismlauncher"
       "raycast"
       "skim"
       "spotify"
       "steam"
+      "tailscale-app"
       "vesktop"
       "visual-studio-code"
-      "x2goclient"
      ];
     brews = [
       "felixkratz/formulae/borders"
-      "gping"
       "matthart1983/tap/netwatch"
-      "mosh"
       "openjdk"
-      "tailscale"
     ];
   };
 }
