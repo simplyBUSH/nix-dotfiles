@@ -19,6 +19,7 @@
 
     shellAliases = {
       cls = "clear";
+      gc="sudo nix-collect-garbage -d && sudo nix store optimise";
       iamb = "iamb -C ~/.config"; 
       kys = "tmux kill-server";
       ll = "eza -lha --git";
@@ -26,7 +27,6 @@
       q = "exit";
       sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon";
       size = "du -sh .";
-      sout = "diskutil unmountDisk /dev/disk4 && sudo diskutil eject /dev/disk4";
       ts = "tailscale";
       vi = "nvim";
       vim = "nvim";
@@ -34,6 +34,8 @@
     
     sessionVariables = {
       CPPFLAGS = "-I/opt/homebrew/opt/openjdk/include";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
       HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
       HOMEBREW_PREFIX = "/opt/homebrew";
       HOMEBREW_REPOSITORY = "/opt/homebrew";

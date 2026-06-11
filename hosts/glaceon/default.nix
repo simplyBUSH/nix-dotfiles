@@ -3,10 +3,11 @@
 {
   environment.systemPackages = with pkgs; [
     fastfetch
-    mosh
-    gping
     ffmpeg
     git
+    gping
+    hyfetch
+    mosh
     ollama
     python313
     speedtest-cli
@@ -17,6 +18,7 @@
 
   nix.settings.experimental-features = "nix-command flakes";
   nix.enable = false;
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = 6;
   nixpkgs.hostPlatform = "aarch64-darwin";

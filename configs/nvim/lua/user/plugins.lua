@@ -1,15 +1,14 @@
-
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then return end
 
 lazy.setup({
 
-{
+  {
     "olimorris/codecompanion.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "lalitmee/codecompanion-spinners.nvim", -- <-- ADDED HERE
+      "lalitmee/codecompanion-spinners.nvim",
     },
     config = function()
       require("codecompanion").setup({
@@ -39,15 +38,12 @@ lazy.setup({
     end,
   },
 
-
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "EdenEast/nightfox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("catppuccin").setup({ flavour = "mocha" })
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("nordfox")
     end,
   },
 
@@ -80,12 +76,12 @@ lazy.setup({
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",      -- LSP completions
-      "hrsh7th/cmp-buffer",         -- Word completions from open buffers
-      "hrsh7th/cmp-path",           -- File path completions
-      "L3MON4D3/LuaSnip",           -- Snippet engine (required by cmp)
-      "saadparwaiz1/cmp_luasnip",   -- Snippet completions
-      "rafamadriz/friendly-snippets", -- Snippet collection (Java, Python, etc.)
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
       local cmp = require("cmp")
@@ -144,19 +140,11 @@ lazy.setup({
       })
       vim.lsp.enable("pyright")
 
-      vim.lsp.config("verible", {
-        capabilities = capabilities,
-        cmd          = { "verible-verilog-ls" },
-        filetypes    = { "verilog", "systemverilog" },
-        root_markers = { ".git" },
-      })
-      vim.lsp.enable("verible")
-
       vim.diagnostic.config({
         virtual_text   = { prefix = "●", source = "if_many" },
         signs          = true,
         underline      = true,
-        update_in_insert = true,   -- <-- shows errors while you type
+        update_in_insert = true,
         severity_sort  = true,
         float = {
           border = "rounded",
@@ -168,7 +156,7 @@ lazy.setup({
 
   {
     "mfussenegger/nvim-jdtls",
-    ft = "java",   -- only loaded for Java files
+    ft = "java",
   },
 
   {
@@ -203,17 +191,18 @@ lazy.setup({
     end,
   },
 
-{
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
       local autopairs = require("nvim-autopairs")
-      autopairs.setup({}) -- Removed check_ts = true
+      autopairs.setup({})
       
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
+
   {
     "numToStr/Comment.nvim",
     config = function() require("Comment").setup() end,
@@ -221,7 +210,7 @@ lazy.setup({
 
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = {
@@ -230,10 +219,9 @@ lazy.setup({
           section_separators   = "",
         },
         sections = {
-          lualine_c = { { "filename", path = 1 } },  -- show relative path
+          lualine_c = { { "filename", path = 1 } },
           lualine_x = {
             {
-              -- show LSP error/warn count in statusline
               function()
                 local e = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
                 local w = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -285,9 +273,4 @@ lazy.setup({
       vim.g.vimtex_quickfix_mode    = 2
     end,
   },
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern  = { "*.v", "*.sv" },
-  callback = function() vim.lsp.buf.format() end,
 })

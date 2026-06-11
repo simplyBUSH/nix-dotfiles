@@ -5,6 +5,7 @@
     ./zsh.nix
     ./git.nix
     ./kitty.nix
+    ./alacritty.nix
     ./tmux.nix
     ./nvim.nix
     ./aerospace.nix
