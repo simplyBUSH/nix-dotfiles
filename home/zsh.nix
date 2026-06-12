@@ -2,7 +2,9 @@
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = false;
+    
+    enableCompletion = true; 
+    
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -22,7 +24,7 @@
       gc="sudo nix-collect-garbage -d && sudo nix store optimise";
       iamb = "iamb -C ~/.config"; 
       kys = "tmux kill-server";
-      ll = "eza -lha --git";
+      ll = "eza -lha --git"; 
       ns = "nix-shell";
       q = "exit";
       sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon";
@@ -44,25 +46,15 @@
       PATH = "/opt/homebrew/opt/openjdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH";
     };
 
-
     initContent = lib.mkMerge [
-      (lib.mkBefore ''
-        autoload -Uz compinit
-        if [[ -n ''${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-          compinit
-        else
-          compinit -C
-        fi
-
+      (lib.mkOrder 550 ''
         fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
       '')
+      
       ''
-
         if [[ -z "$TMUX" && -n "$KITTY_PID" && -n "$KITTY_TMUX" ]]; then
             tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
         fi
-
-
       ''
     ];
   };
