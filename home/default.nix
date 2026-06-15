@@ -4,6 +4,7 @@
   imports = [
     ./zsh.nix
     ./git.nix
+    ./discordo.nix
     ./kitty.nix
     ./alacritty.nix
     ./tmux.nix

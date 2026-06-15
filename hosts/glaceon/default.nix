@@ -103,6 +103,8 @@
       "tailscale-app"
       "vesktop"
       "visual-studio-code"
+      "antigravity-cli"
+      "antigravity"
      ];
     brews = [
       "felixkratz/formulae/borders"

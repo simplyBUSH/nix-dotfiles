@@ -152,7 +152,6 @@
             renderer = { group_empty = true },
             filters = { dotfiles = false },
           })
-          -- Bind Ctrl+N to toggle the tree
           vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle File Tree" })
         '';
       }
@@ -161,7 +160,6 @@
         plugin = nvim-jdtls;
         type = "lua";
         config = ''
-          -- nvim-jdtls requires attaching via an autocommand
           vim.api.nvim_create_autocmd("FileType", {
             pattern = "java",
             callback = function()
@@ -245,6 +243,13 @@
                 },
                 "encoding", "fileformat", "filetype",
               },
+              lualine_y = {
+                {
+                  function() return "▶ Run" end,
+                  on_click = function() _G.compile_and_run() end,
+                  color = { fg = "#a3be8c", gui = "bold" },
+                },
+              },
             },
           })
         '';
@@ -317,7 +322,34 @@
       local keymap = vim.keymap.set
       local opts   = { noremap = true, silent = true }
 
-      -- Options
+      local function compile_and_run()
+        local ft   = vim.bo.filetype
+        local file = vim.fn.expand("%:p")
+        local name = vim.fn.expand("%:t:r")
+        local dir  = vim.fn.expand("%:p:h")
+
+        local cmds = {
+          cpp        = ("cd %s && g++ -std=c++17 -Wall -o /tmp/%s %s && /tmp/%s"):format(dir, name, file, name),
+          c          = ("cd %s && gcc -Wall -o /tmp/%s %s && /tmp/%s"):format(dir, name, file, name),
+          python     = ("python3 %s"):format(file),
+          java       = ("cd %s && javac %s && java -cp %s %s"):format(dir, vim.fn.expand("%:t"), dir, name),
+          javascript = ("node %s"):format(file),
+          lua        = ("lua %s"):format(file),
+          tex        = "echo 'Use <leader>ll for VimTeX compilation'",
+        }
+
+        local cmd = cmds[ft]
+        if not cmd then
+          vim.notify("  No run config for filetype: " .. ft, vim.log.levels.WARN)
+          return
+        end
+
+        vim.cmd("silent! w")
+
+        vim.cmd("1TermExec cmd=" .. vim.fn.shellescape(cmd))
+      end
+      _G.compile_and_run = compile_and_run
+
       opt.relativenumber = true
       opt.number = true
       opt.tabstop = 4
@@ -336,7 +368,6 @@
       opt.splitbelow = true
       opt.undofile = true
 
-      -- Keymaps
       vim.g.mapleader = " "
 
       keymap("n", "<leader>ai", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "Toggle AI Chat" })
@@ -394,7 +425,9 @@
       keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
       keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
-      -- Autocmds
+      keymap("n", "<F5>",       compile_and_run, { desc = "Compile & Run" })
+      keymap("n", "<leader>r",  compile_and_run, { desc = "Compile & Run" })
+
       function _G.set_terminal_keymaps()
         local o = { buffer = 0 }
         vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], o)

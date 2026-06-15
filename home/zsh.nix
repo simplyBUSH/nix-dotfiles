@@ -9,7 +9,7 @@
     syntaxHighlighting.enable = true;
 
     localVariables = {
-      PROMPT = "[%n@%F{#bae2de}glaceon%f %~]%% ";
+      PROMPT = "%n@%F{#bae2de}%m%f %~ %% ";
     };
 
     history = {
@@ -22,6 +22,7 @@
     shellAliases = {
       cls = "clear";
       gc="sudo nix-collect-garbage -d && sudo nix store optimise";
+      gemini="agy";
       iamb = "iamb -C ~/.config"; 
       kys = "tmux kill-server";
       ll = "eza -lha --git"; 
