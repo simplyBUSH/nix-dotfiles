@@ -13,7 +13,6 @@
     speedtest-cli
     stats
     uv
-    yazi
   ];
 
   nix.settings.experimental-features = "nix-command flakes";

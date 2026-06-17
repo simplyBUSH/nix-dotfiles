@@ -1,14 +1,20 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
   programs.alacritty = {
     enable = true;
     theme = "carbonfox";
     
     settings = {
-      window.padding = {
-        x = 8;
-        y = 8;
+      font = {
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Regular";
+        };
       };
 
       colors.primary = {

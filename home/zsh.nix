@@ -53,7 +53,7 @@
       '')
       
       ''
-        if [[ -z "$TMUX" && -n "$KITTY_PID" && -n "$KITTY_TMUX" ]]; then
+        if [[ -z "$TMUX" && -n "$AUTO_TMUX" ]]; then
             tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
         fi
       ''

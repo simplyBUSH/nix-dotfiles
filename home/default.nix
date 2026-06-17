@@ -5,6 +5,7 @@
     ./zsh.nix
     ./git.nix
     ./discordo.nix
+    ./yazi.nix
     ./kitty.nix
     ./alacritty.nix
     ./tmux.nix

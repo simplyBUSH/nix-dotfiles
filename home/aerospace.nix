@@ -74,16 +74,16 @@
         alt-shift-space = "layout floating tiling";
 
         # apps
-        alt-shift-enter = "exec-and-forget open -a kitty";
-        alt-shift-t = "exec-and-forget env KITTY_TMUX=1 open -a kitty";
-        alt-shift-f = "fullscreen";
-        alt-shift-w = ''exec-and-forget sh -c "sleep 0.1 && open -a firefox"'';
-        alt-shift-e = "exec-and-forget open -a finder";
-        alt-shift-v = "exec-and-forget open -a vesktop";
-        alt-shift-m = "exec-and-forget open -a element";
         alt-shift-c = "exec-and-forget code";
+        alt-shift-e = "exec-and-forget open -a finder";
+        alt-shift-enter = "exec-and-forget env AUTO_TMUX=1 open -n -a alacritty --args -o window.startup_mode=Fullscreen";
+        alt-shift-f = "fullscreen";
+        alt-shift-m = "exec-and-forget open -a element";
         alt-shift-r = "reload-config";
         alt-shift-s = "exec-and-forget open -a 'System Settings'";
+        alt-shift-t = "exec-and-forget env AUTO_TMUX=1 open -a kitty";
+        alt-shift-v = "exec-and-forget open -a vesktop";
+        alt-shift-w = ''exec-and-forget sh -c "sleep 0.1 && open -a firefox"'';
       };
     };
   };
