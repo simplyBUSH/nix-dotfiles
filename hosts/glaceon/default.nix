@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
+let
+  accent = "#bae2de";
+in
 {
+  home-manager.extraSpecialArgs = { inherit accent; };
   environment.systemPackages = with pkgs; [
     fastfetch
     ffmpeg

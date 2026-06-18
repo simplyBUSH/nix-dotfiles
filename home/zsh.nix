@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, accent, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -9,7 +9,7 @@
     syntaxHighlighting.enable = true;
 
     localVariables = {
-      PROMPT = "%n@%F{#bae2de}%m%f %~ %% ";
+      PROMPT = "%n@%F{${accent}}%m%f %~ %% ";
     };
 
     history = {

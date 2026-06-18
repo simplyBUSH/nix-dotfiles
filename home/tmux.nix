@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, accent, ... }:
 
 {
   programs.tmux = {
@@ -35,7 +35,7 @@
       bind -n C-S-Right swap-window -t +1\; select-window -t +1
       
       # COLOR CONFIGS
-      %hidden ACCENT="#bae2de"
+      %hidden ACCENT="${accent}"
       %hidden GREY="#b6b8bb"
       %hidden DARK="#0c0c0c"
       
