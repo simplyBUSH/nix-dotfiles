@@ -65,6 +65,7 @@ in
       mru-spaces = false;
       tilesize = 42;
       autohide-delay = 10.0;
+      orientation = "bottom";
     };
     finder = {
       AppleShowAllExtensions = true;
@@ -93,6 +94,8 @@ in
 
     casks = [
       "affinity"
+      "antigravity"
+      "antigravity-cli"
       "boring-notch"
       "element"
       "firefox"
@@ -105,9 +108,7 @@ in
       "steam"
       "tailscale-app"
       "vesktop"
-      "visual-studio-code"
-      "antigravity-cli"
-      "antigravity"
+      "windscribe"
      ];
     brews = [
       "felixkratz/formulae/borders"

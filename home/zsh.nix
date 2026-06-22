@@ -28,7 +28,7 @@
       ll = "eza -lha --git"; 
       ns = "nix-shell";
       q = "exit";
-      sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon";
+      sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon"; 
       size = "du -sh .";
       ts = "tailscale";
       vi = "nvim";

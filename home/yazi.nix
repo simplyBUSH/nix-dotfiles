@@ -12,7 +12,7 @@
     extraPackages = with pkgs; [
       ffmpegthumbnailer   # video thumbnails
       unar                # archive preview/extraction
-      poppler_utils       # PDF preview
+      poppler-utils       # PDF preview
       imagemagick         # image conversion / preview fallback
       ripgrep             # file content search (bound to 's' below)
       fd                  # fast find (used internally)
