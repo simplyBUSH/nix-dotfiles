@@ -1,4 +1,7 @@
 { pkgs, lib, accent, ... }:
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+in
 {
   programs.zsh = {
     enable = true;
@@ -28,7 +31,9 @@
       ll = "eza -lha --git"; 
       ns = "nix-shell";
       q = "exit";
-      sdr = "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon"; 
+      sdr = if isDarwin
+        then "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon"
+        else "sudo nixos-rebuild switch --flake ~/nix-config/.#eevee";
       size = "du -sh .";
       ts = "tailscale";
       vi = "nvim";
@@ -36,9 +41,10 @@
     };
     
     sessionVariables = {
-      CPPFLAGS = "-I/opt/homebrew/opt/openjdk/include";
       EDITOR = "nvim";
       VISUAL = "nvim";
+    } // lib.optionalAttrs isDarwin {
+      CPPFLAGS = "-I/opt/homebrew/opt/openjdk/include";
       HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
       HOMEBREW_PREFIX = "/opt/homebrew";
       HOMEBREW_REPOSITORY = "/opt/homebrew";
@@ -48,10 +54,9 @@
     };
 
     initContent = lib.mkMerge [
-      (lib.mkOrder 550 ''
+      (lib.mkIf isDarwin (lib.mkOrder 550 ''
         fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-      '')
-      
+      ''))
       ''
         if [[ -z "$TMUX" && -n "$AUTO_TMUX" ]]; then
             tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
