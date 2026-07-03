@@ -15,12 +15,6 @@
     };
   };
 
-  nixConfig = {
-    extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
-    extra-trusted-public-keys = [
-      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-    ];
-  };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nixos-hardware, ... }: {
     darwinConfigurations."glaceon" = nix-darwin.lib.darwinSystem {
@@ -36,20 +30,5 @@
       ];
     };
 
-    nixosConfigurations."eevee" = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = inputs;
-      modules = [
-        nixos-hardware.nixosModules.raspberry-pi-5
-        ./hosts/eevee
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.bush = import ./home/defaults/eevee.nix;
-          home-manager.backupFileExtension = "backup";
-        }
-      ];
-    };
   };
 }

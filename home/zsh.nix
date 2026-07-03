@@ -12,7 +12,7 @@ in
     syntaxHighlighting.enable = true;
 
     localVariables = {
-      PROMPT = "%n@%F{${accent}}%m%f %~ %% ";
+      PROMPT = "[%n@%F{${accent}}%m%f %~] %% ";
     };
 
     history = {

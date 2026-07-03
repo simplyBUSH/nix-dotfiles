@@ -25,12 +25,12 @@
       };
 
       gaps = {
-        inner.horizontal = 10;
-        inner.vertical = 10;
-        outer.left = 5;
-        outer.bottom = 5;
-        outer.top = 5;
-        outer.right = 5;
+        inner.horizontal = 4;
+        inner.vertical = 4;
+        outer.left = 4;
+        outer.bottom = 4;
+        outer.top = 4;
+        outer.right = 4;
       };
 
       mode.main.binding = {

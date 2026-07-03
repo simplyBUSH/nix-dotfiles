@@ -15,7 +15,6 @@ in
     ollama
     python313
     speedtest-cli
-    stats
     uv
   ];
 
@@ -65,7 +64,7 @@ in
       mru-spaces = false;
       tilesize = 42;
       autohide-delay = 10.0;
-      orientation = "bottom";
+      orientation = "left";
     };
     finder = {
       AppleShowAllExtensions = true;
@@ -96,7 +95,10 @@ in
       "affinity"
       "antigravity"
       "antigravity-cli"
-      "boring-notch"
+      ({
+        name = "TheBoredTeam/boring-notch/boring-notch";
+        trusted = true;
+      })
       "element"
       "firefox"
       "linearmouse"
