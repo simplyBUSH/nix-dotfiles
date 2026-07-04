@@ -30,13 +30,13 @@
       ];
     };
 
-    homeConfigurations."bush@eevee" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."eevee" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
       modules = [
         ./home/defaults/eevee.nix
       ];
       extraSpecialArgs = {
-        accent = "#bae2de";
+        accent = "#b38b5f";
       };
     };
   };
