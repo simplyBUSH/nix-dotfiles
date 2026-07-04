@@ -13,7 +13,9 @@ in
     hyfetch
     mosh
     ollama
+    openvpn
     python313
+    raycast
     speedtest-cli
     uv
   ];
@@ -104,18 +106,15 @@ in
       "linearmouse"
       "mx-power-gadget"
       "pearcleaner"
-      "raycast"
       "skim"
       "spotify"
       "steam"
       "tailscale-app"
       "vesktop"
-      "windscribe"
      ];
     brews = [
       "felixkratz/formulae/borders"
       "matthart1983/tap/netwatch"
-      "openjdk"
     ];
   };
 }

@@ -7,6 +7,7 @@
     settings = {
       start-at-login = false;
 
+      config-version = 2;
       after-startup-command = [
         "exec-and-forget borders active_color=0xff4ca0b3 inactive_color=0x00000000 width=7.5"
       ];

@@ -6,7 +6,6 @@
     ../tmux.nix
     ../yazi.nix
     ../zsh.nix
-    ../iamb.nix
   ];
 
   home.packages = [
