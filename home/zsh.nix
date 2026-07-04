@@ -33,7 +33,7 @@ in
       q = "exit";
       sdr = if isDarwin
         then "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon"
-        else "sudo nixos-rebuild switch --flake ~/nix-config/.#eevee";
+        else "home-manager switch --flake ~/nix-config#bush@eevee";
       size = "du -sh .";
       ts = "tailscale";
       vi = "nvim";

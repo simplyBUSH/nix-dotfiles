@@ -8,10 +8,24 @@
     ../zsh.nix
   ];
 
-  home.packages = [
-    pkgs.kitty.terminfo
-    pkgs.alacritty.terminfo
+  home.username = "bush";
+  home.homeDirectory = "/home/bush";
+  home.stateVersion = "24.11";
+
+  home.packages = with pkgs; [
+    kitty.terminfo
+    alacritty.terminfo
+    ripgrep
+    fd
+    eza
+    fzf
+    jq
+    btop
+    tree
+    wget
+    curl
+    fastfetch
   ];
 
-  home.stateVersion = "24.11";
+  programs.home-manager.enable = true;
 }
