@@ -1,6 +1,7 @@
 { pkgs, lib, accent, ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
+  isNixOS = builtins.pathExists /etc/NIXOS;
 in
 {
   programs.zsh = {
@@ -33,6 +34,8 @@ in
       q = "exit";
       sdr = if isDarwin
         then "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon"
+        else if isNixOS
+        then "sudo nixos-rebuild switch --flake ~/nix-config#$(hostname)"
         else "home-manager switch --flake ~/nix-config#eevee";
       size = "du -sh .";
       ts = "tailscale";

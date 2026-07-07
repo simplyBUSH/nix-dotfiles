@@ -9,12 +9,13 @@
     ../alacritty.nix
     ../tmux.nix
     ../nvim.nix
-    ../aerospace.nix
+    ../hyprland.nix
+    ../wofi.nix
     ../iamb.nix
   ];
 
   home.username = "bush";
-  home.homeDirectory = "/Users/bush";
+  home.homeDirectory = "/home/bush";
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [

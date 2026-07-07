@@ -30,6 +30,20 @@
       ];
     };
 
+    nixosConfigurations."jolteon" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hosts/jolteon
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.bush = import ./home/defaults/jolteon.nix;
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
+    };
+
     homeConfigurations."eevee" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.aarch64-linux;
       modules = [
