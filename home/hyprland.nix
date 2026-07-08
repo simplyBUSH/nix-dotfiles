@@ -1,6 +1,14 @@
 { pkgs, accent ? "#FFFF00", ... }:
 
 {
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "/home/bush/wallpaper.png" ];
+      wallpaper = [ ", /home/bush/wallpaper.png" ];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -8,6 +16,15 @@
       "$mod" = "SUPER";
 
       monitor = ", preferred, auto, 1";
+
+      cursor = {
+        no_hardware_cursors = true;
+      };
+
+      env = [
+        "XCURSOR_THEME,Adwaita"
+        "XCURSOR_SIZE,24"
+      ];
 
       general = {
         gaps_in = 4;
@@ -43,10 +60,6 @@
         ];
       };
 
-      dwindle = {
-        pseudotile = true;
-        preserve_split = true;
-      };
 
       input = {
         follow_mouse = 1;
@@ -89,7 +102,6 @@
         "$mod SHIFT, right, swapwindow, r"
 
         # Layout
-        "$mod, slash, togglesplit,"
         "$mod SHIFT, space, togglefloating,"
         "$mod SHIFT, F, fullscreen,"
 
@@ -100,12 +112,12 @@
         "$mod SHIFT, M, exec, element-desktop"
         "$mod SHIFT, R, exec, hyprctl reload"
         "$mod SHIFT, S, exec, XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
-        "$mod SHIFT, T, exec, kitty tmux"
+        "$mod SHIFT, T, exec, env AUTO_TMUX=1 kitty"
         "$mod SHIFT, V, exec, vesktop"
         "$mod SHIFT, W, exec, firefox"
 
         # Wofi launcher
-        "$mod, D, exec, wofi --show drun"
+        "$mod, space, exec, wofi --show drun"
 
         # Close window
         "$mod, Q, killactive,"

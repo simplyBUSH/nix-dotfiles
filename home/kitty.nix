@@ -3,7 +3,7 @@
 {
   programs.kitty = {
     enable = true;
-    themeFile = "nordfox";
+    themeFile = "Nordfox";
 
     settings = {
       hide_window_decorations = "titlebar-only";
