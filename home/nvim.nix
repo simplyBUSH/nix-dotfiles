@@ -24,7 +24,7 @@
       fzf
       pyright
       jdt-language-server
-      texlive.combined.scheme-full
+      # texlive.combined.scheme-full
       lazygit
     ];
 
@@ -274,21 +274,21 @@
         config = ''require("docs-view").setup({ position = "right", width = 60 })'';
       }
 
-      {
-        plugin = vimtex;
-        type = "lua";
-        config = ''
-          vim.g.vimtex_compiler_latexmk = {
-            out_dir = "build",
-            options = { "-pdf", "-shell-escape", "-verbose",
-                        "-file-line-error", "-synctex=1", "-interaction=nonstopmode" },
-          }
-          vim.g.vimtex_view_method      = "skim"
-          vim.g.vimtex_view_skim_activate = 0
-          vim.g.vimtex_fold_enabled     = 0
-          vim.g.vimtex_quickfix_mode    = 2
-        '';
-      }
+      # {
+      #   plugin = vimtex;
+      #   type = "lua";
+      #   config = ''
+      #     vim.g.vimtex_compiler_latexmk = {
+      #       out_dir = "build",
+      #       options = { "-pdf", "-shell-escape", "-verbose",
+      #                   "-file-line-error", "-synctex=1", "-interaction=nonstopmode" },
+      #     }
+      #     vim.g.vimtex_view_method      = "skim"
+      #     vim.g.vimtex_view_skim_activate = 0
+      #     vim.g.vimtex_fold_enabled     = 0
+      #     vim.g.vimtex_quickfix_mode    = 2
+      #   '';
+      # }
 
       {
         plugin = codecompanion-nvim;

@@ -1,5 +1,5 @@
 {
-  description = "Bush's nix-darwin config";
+  description = "personal nix configs";
   
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -39,6 +39,20 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.bush = import ./home/defaults/jolteon.nix;
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
+    };
+
+    nixosConfigurations."vmware" = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        ./hosts/vmware
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.bush = import ./home/defaults/vmware.nix;
           home-manager.backupFileExtension = "backup";
         }
       ];

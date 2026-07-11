@@ -1,4 +1,4 @@
-{ pkgs, lib, accent, isJolteon ? false, ... }:
+{ pkgs, lib, accent,  ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
 in
@@ -31,11 +31,9 @@ in
       ll = "eza -lha --git"; 
       ns = "nix-shell";
       q = "exit";
-      sdr = if isDarwin
-        then "sudo darwin-rebuild switch --flake ~/nix-config/.#glaceon"
-        else if isJolteon
-        then "sudo nixos-rebuild switch --flake ~/nix-config#$(hostname)"
-        else "home-manager switch --flake ~/nix-config#eevee";
+      sdr = if pkgs.stdenv.isDarwin 
+        then "sudo darwin-rebuild switch --flake ~/nix-config#$(hostname -s)"
+        else "sudo nixos-rebuild switch --flake ~/nix-config#$(hostname)";
       size = "du -sh .";
       ts = "tailscale";
       vi = "nvim";
