@@ -31,13 +31,16 @@ in
       ll = "eza -lha --git"; 
       ns = "nix-shell";
       q = "exit";
-      sdr = if pkgs.stdenv.isDarwin 
+      sdr = if isDarwin 
         then "sudo darwin-rebuild switch --flake ~/nix-config#$(hostname -s)"
         else "sudo nixos-rebuild switch --flake ~/nix-config#$(hostname)";
       size = "du -sh .";
       ts = "tailscale";
       vi = "nvim";
       vim = "nvim";
+    } // lib.optionalAttrs isDarwin {
+      vmls = ''"/Applications/VMware Fusion.app/Contents/Public/vmrun" list'';
+      vmstop = ''"/Applications/VMware Fusion.app/Contents/Public/vmrun" -T fusion stop "/Volumes/Glaceon_data/VMs/NixOS.vmwarevm" soft'';
     };
     
     sessionVariables = {
@@ -54,14 +57,21 @@ in
     };
 
     initContent = lib.mkMerge [
-      (lib.mkIf isDarwin (lib.mkOrder 550 ''
-        fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-      ''))
-      ''
-        if [[ -z "$TMUX" && -n "$AUTO_TMUX" ]]; then
-            tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
-        fi
-      ''
+          (lib.mkIf isDarwin (lib.mkOrder 550 ''
+            fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+            vmnix() {
+              echo "Booting NixOS..."
+              "/Applications/VMware Fusion.app/Contents/Public/vmrun" -T fusion start "/Volumes/Glaceon_data/VMs/NixOS.vmwarevm" nogui
+              sleep 8 
+              mosh nix
+            }
+          ''))
+          ''
+            if [[ -z "$TMUX" && -n "$AUTO_TMUX" ]]; then
+                tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
+            fi
+          ''
     ];
   };
 }
