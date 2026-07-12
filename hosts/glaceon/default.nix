@@ -106,7 +106,7 @@ in
       "linearmouse"
       "mx-power-gadget"
       "pearcleaner"
-      "skim"
+      # "skim"
       "spotify"
       "steam"
       "tailscale-app"

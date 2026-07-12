@@ -14,6 +14,7 @@
 
     settings = {
       "$mod" = "SUPER";
+      exec-once = [ "qs -c noctalia-shell" ];
 
       monitor = ", preferred, auto, 1";
 

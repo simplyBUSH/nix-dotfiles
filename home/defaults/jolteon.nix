@@ -12,6 +12,7 @@
     ../hyprland.nix
     ../wofi.nix
     ../iamb.nix
+    ../noctalia.nix
   ];
 
   home.username = "bush";
