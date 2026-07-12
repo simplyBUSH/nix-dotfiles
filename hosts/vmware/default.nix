@@ -30,14 +30,21 @@ in
 
   system.stateVersion = "25.05";
   
-  networking.firewall.allowedUDPPortRanges = [
-    { from = 60000; to = 61000; }
-  ];
-
-  networking.hostName = "vmware";
-  networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
-  networking.dhcpcd.extraConfig = "nohook resolv.conf";
+  networking = {
+    defaultGateway = "172.16.169.2";
+    dhcpcd.extraConfig = "nohook resolv.conf";
+    firewall.allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
+    hostName = "vmware";
+    interfaces.enp2s0.ipv4.addresses = [
+      {
+        address = "172.16.169.10";
+        prefixLength = 24;
+      }
+    ];
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    networkmanager.enable = true;
+    useDHCP = false;
+  };
 
   virtualisation.vmware.guest.enable = true;
 

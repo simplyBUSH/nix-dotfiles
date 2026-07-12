@@ -65,7 +65,7 @@ in
     pulse.enable = true;
   };
 
-    greetd = {
+  greetd = {
     enable = true;
     settings = {
       default_session = {
@@ -76,19 +76,15 @@ in
     };
     openssh.enable = true;
     tailscale.enable = true;
-  };
-  
+  }; 
 
-  # OpenGL
   hardware.graphics = {
     enable = true;
-
     extraPackages = with pkgs; [
     vulkan-loader
     mesa.opencl
     ];
   };
- 
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
