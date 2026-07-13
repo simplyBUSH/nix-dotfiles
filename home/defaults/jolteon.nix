@@ -8,7 +8,8 @@
     ../kitty.nix
     ../alacritty.nix
     ../tmux.nix
-    ../nvim.nix
+    ../nvim/core.nix
+    ../nvim/lsp.nix
     ../hyprland.nix
     ../wofi.nix
     ../iamb.nix

@@ -9,7 +9,7 @@
 
       config-version = 2;
       after-startup-command = [
-        "exec-and-forget borders active_color=0xff4ca0b3 inactive_color=0x00000000 width=7.5"
+        "exec-and-forget borders active_color=0xff4ca0b3 inactive_color=0x00000000 width=10"
       ];
 
       workspace-to-monitor-force-assignment = {
@@ -26,12 +26,12 @@
       };
 
       gaps = {
-        inner.horizontal = 4;
-        inner.vertical = 4;
-        outer.left = 4;
-        outer.bottom = 4;
-        outer.top = 4;
-        outer.right = 4;
+        inner.horizontal = 2;
+        inner.vertical = 2;
+        outer.left = 1;
+        outer.bottom = 1;
+        outer.top = 1;
+        outer.right = 1;
       };
 
       mode.main.binding = {
