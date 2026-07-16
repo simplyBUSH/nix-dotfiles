@@ -4,7 +4,7 @@
   imports = [
     ../zsh.nix
     ../git.nix
-    ../yazi.nix
+#    ../yazi.nix
     ../kitty.nix
     ../alacritty.nix
     ../tmux.nix
