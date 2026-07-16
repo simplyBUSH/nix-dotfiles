@@ -20,7 +20,7 @@
   };
 
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-on-droid, nixos-hardware, ... }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nixos-hardware, ... }: {
     darwinConfigurations."glaceon" = nix-darwin.lib.darwinSystem {
       modules = [
         ./hosts/glaceon
