@@ -9,24 +9,26 @@ in
 
   environment.systemPackages = with pkgs; [
     efibootmgr
+    element-desktop
     fastfetch
     ffmpeg
+    firefox
     git
     gping
     hyfetch
     mosh
-    ollama
+    nautilus
+    ollama-rocm
     openvpn
     python313
     refind
     speedtest-cli
-    uv
-    wofi
-    element-desktop
-    firefox
     spotify
+    steam
+    swaybg
+    uv
     vesktop
-    nautilus
+    wofi
   ];
 
   nix.settings.experimental-features = "nix-command flakes";
@@ -34,8 +36,28 @@ in
 
   system.stateVersion = "25.05";
 
-  networking.hostName = "jolteon";
-  networking.networkmanager.enable = true;
+  networking = {
+  hostName = "jolteon";
+  networkmanager = {
+    enable = true;
+    ensureProfiles.profiles = {
+      "Wired connection 1" = {
+        connection = {
+          id = "Wired connection 1";
+          type = "ethernet";
+          interface-name = "enp7s0";
+        };
+        ethernet = {
+          wake-on-lan = "magic";
+        };
+        ipv4.method = "auto";
+        ipv6.addr-gen-mode = "default";
+        ipv6.method = "auto";
+      };
+    };
+  };
+  interfaces.enp7s0.wakeOnLan.enable = true;
+};
 
   users.users.bush = {
     isNormalUser = true;

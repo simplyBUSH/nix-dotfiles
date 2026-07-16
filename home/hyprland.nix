@@ -1,14 +1,6 @@
 { pkgs, accent ? "#FFFF00", ... }:
 
 {
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [ "/home/bush/wallpaper.png" ];
-      wallpaper = [ ", /home/bush/wallpaper.png" ];
-    };
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -17,7 +9,7 @@
       exec-once = [ "qs -c noctalia-shell" ];
 
       monitor = ", preferred, auto, 1";
-
+      exec-once = [ "swaybg -o DP-4 -i /home/bush/wallpaper.png -m fill"];
       cursor = {
         no_hardware_cursors = true;
       };
