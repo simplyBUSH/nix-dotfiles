@@ -7,7 +7,10 @@
     settings = {
       "$mod" = "SUPER";
       monitor = ", preferred, auto, 1";
-      exec-once = [ "swaybg -i /home/bush/wallpaper.png -m fill"];
+      exec-once = [ 
+          "swaybg -i /home/bush/wallpaper.png -m fill"
+          "qs -c noctalia-shell"
+        ];
       cursor = {
         no_hardware_cursors = true;
       };

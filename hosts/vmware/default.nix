@@ -23,6 +23,7 @@ in
     wofi
     firefox
     nautilus
+    foot
     swaybg
   ];
 
