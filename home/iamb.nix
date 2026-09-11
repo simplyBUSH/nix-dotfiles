@@ -18,7 +18,7 @@
       theme = "default";
 
       image_preview.protocol = {
-        type = "kitty";
+        type = "halfblocks";
 #        size = {          height = 65;          width = 180;        };
       };
 

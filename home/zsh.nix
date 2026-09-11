@@ -25,6 +25,7 @@ in
     shellAliases = {
       cls = "pyroclear";
       eevee-local = "mosh --server=/home/bush/.nix-profile/bin/mosh-server --bind-server=10.42.0.2 bush@10.42.0.2";
+      eevee-gadget = "mosh --server=/home/bush/.nix-profile/bin/mosh-server bush@eevee.local";
       eevee = "mosh --server=/home/bush/.nix-profile/bin/mosh-server eevee";
       clear = "pyroclear";
       gc="sudo nix-collect-garbage -d && sudo nix store optimise";
@@ -63,12 +64,6 @@ in
             fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
             
           ''))
-          ''
-            if [[ -z "$TMUX" && -n "$AUTO_TMUX" ]]; then
-                tmux attach-session -t auto 2>/dev/null || tmux new-session -s auto
-            fi
-
-          ''
     ];
     #            clear && ${pkgs.hyfetch}/bin/hyfetch
   };

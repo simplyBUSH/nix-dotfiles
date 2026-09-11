@@ -10,14 +10,10 @@
     withRuby = false;
     withPython3 = false;
 
-    extraPackages = with pkgs; [
-      ripgrep
-      fd
-      git
-      fzf
-    ];
+    extraPackages = with pkgs; [ rust-analyzer ];
 
     plugins = with pkgs.vimPlugins; [
+    
       {
         plugin = nightfox-nvim;
         type = "lua";
@@ -105,41 +101,6 @@
       }
 
       {
-        plugin = lualine-nvim;
-        type = "lua";
-        config = ''
-          require("lualine").setup({
-            options = {
-              theme                = "auto",
-              component_separators = "|",
-              section_separators   = "",
-            },
-            sections = {
-              lualine_c = { { "filename", path = 1 } },
-              lualine_x = {
-                {
-                  function()
-                    local e = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-                    local w = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-                    return (e > 0 and (" " .. e .. " ") or "") ..
-                           (w > 0 and (" " .. w) or "")
-                  end,
-                },
-                "encoding", "fileformat", "filetype",
-              },
-              lualine_y = {
-                {
-                  function() return "▶ Run" end,
-                  on_click = function() _G.compile_and_run() end,
-                  color = { fg = "#a3be8c", gui = "bold" },
-                },
-              },
-            },
-          })
-        '';
-      }
-
-      {
         plugin = toggleterm-nvim;
         type = "lua";
         config = ''
@@ -151,6 +112,73 @@
           })
         '';
       }
+      
+      lualine-nvim
+
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = ''
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+          vim.lsp.config("clangd", { capabilities = capabilities })
+          vim.lsp.config("nixd", { capabilities = capabilities })
+          vim.lsp.config("rust_analyzer", { capabilities = capabilities })
+          vim.lsp.enable({ "clangd", "nixd", "rust_analyzer" })   
+
+          vim.diagnostic.config({
+            virtual_text = true,
+            signs = true,
+            underline = true,
+            update_in_insert = false,
+            severity_sort = true,
+          })
+
+          local o = { noremap = true, silent = true }
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, o)
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, o)
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, o)
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, o)
+          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, o)
+        '';
+      }
+
+      cmp-nvim-lsp
+      luasnip
+      cmp_luasnip
+
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = ''
+          local cmp = require("cmp")
+          cmp.setup({
+            snippet = {
+              expand = function(args) require("luasnip").lsp_expand(args.body) end,
+            },
+            mapping = cmp.mapping.preset.insert({
+              ["<C-Space>"] = cmp.mapping.complete(),
+              ["<CR>"] = cmp.mapping.confirm({ select = true }),
+              ["<Tab>"] = cmp.mapping.select_next_item(),
+              ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+            }),
+            sources = {
+              { name = "nvim_lsp" },
+              { name = "luasnip" },
+            },
+          })
+        '';
+      }
+
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = ''
+          require("lualine").setup({
+            options = { theme = "auto", globalstatus = true },
+          })
+        '';
+      }
     ];
 
     # Global Options, Keymaps, and Autocmds
@@ -158,35 +186,6 @@
       local opt = vim.opt
       local keymap = vim.keymap.set
       local opts   = { noremap = true, silent = true }
-
-      local function compile_and_run()
-        local ft   = vim.bo.filetype
-        local file = vim.fn.expand("%:p")
-        local name = vim.fn.expand("%:t:r")
-        local dir  = vim.fn.expand("%:p:h")
-
-        local cmds = {
-          cpp        = ("cd %s && g++ -std=c++17 -Wall -o /tmp/%s %s && /tmp/%s"):format(dir, name, file, name),
-          c          = ("cd %s && gcc -Wall -o /tmp/%s %s && /tmp/%s"):format(dir, name, file, name),
-          python     = ("python3 %s"):format(file),
-          java       = ("cd %s && javac %s && java -cp %s %s"):format(dir, vim.fn.expand("%:t"), dir, name),
-          javascript = ("node %s"):format(file),
-          lua        = ("lua %s"):format(file),
-          rust       = ("cd %s && cargo run"):format(dir),
-          tex        = "echo 'Use <leader>ll for VimTeX compilation'",
-        }
-
-        local cmd = cmds[ft]
-        if not cmd then
-          vim.notify("  No run config for filetype: " .. ft, vim.log.levels.WARN)
-          return
-        end
-
-        vim.cmd("silent! w")
-
-        vim.cmd("1TermExec cmd=" .. vim.fn.shellescape(cmd))
-      end
-      _G.compile_and_run = compile_and_run
 
       opt.relativenumber = true
       opt.number = true
@@ -234,16 +233,6 @@
       keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
       keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
-      keymap("n", "<F5>",       compile_and_run, { desc = "Compile & Run" })
-      keymap("n", "<leader>r",  compile_and_run, { desc = "Compile & Run" })
-
-      function _G.set_terminal_keymaps()
-        local o = { buffer = 0 }
-        vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], o)
-        vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], o)
-        vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], o)
-        vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], o)
-      end
       vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
     '';
   };
