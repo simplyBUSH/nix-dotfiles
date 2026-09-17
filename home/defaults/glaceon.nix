@@ -9,7 +9,7 @@
     ../alacritty.nix
     ../tmux.nix
     ../nvim.nix
-    ../aerospace.nix
+#    ../aerospace.nix
     ../iamb.nix
   ];
 

@@ -77,12 +77,12 @@ in
       extraFlags = [ "--force" ];
     };
     taps = [
-     "surgedm/tap" 
+#     "surgedm/tap" 
 #     "TheBoredTeam/boring-notch"
     ];
 
     casks = [
-      "SurgeDM/tap/surge"
+#      "SurgeDM/tap/surge"
       "arduino-ide"
       "bitwarden"
       "dolphin"
@@ -103,7 +103,7 @@ in
 #      "TheBoredTeam/boring-notch/boring-notch"
      ];
     brews = [
-      "felixkratz/formulae/borders"
+#      "felixkratz/formulae/borders"
       "matthart1983/tap/netwatch"
     ];
   };
