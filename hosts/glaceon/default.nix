@@ -79,12 +79,12 @@ in
     taps = [
 #     "surgedm/tap" 
 #     "TheBoredTeam/boring-notch"
+      "koekeishiya/formulae"
     ];
 
     casks = [
 #      "SurgeDM/tap/surge"
       "arduino-ide"
-      "bitwarden"
       "dolphin"
       "element"
       "firefox"
@@ -105,6 +105,7 @@ in
     brews = [
 #      "felixkratz/formulae/borders"
       "matthart1983/tap/netwatch"
+      "koekeishiya/formulae/yabai"
     ];
   };
 }

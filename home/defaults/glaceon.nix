@@ -7,6 +7,7 @@
 #    ../yazi.nix
 #    ../kitty.nix
     ../alacritty.nix
+    ../yabai.nix
     ../tmux.nix
     ../nvim.nix
 #    ../aerospace.nix
