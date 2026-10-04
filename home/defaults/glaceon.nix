@@ -7,10 +7,10 @@
 #    ../yazi.nix
 #    ../kitty.nix
     ../alacritty.nix
-    ../yabai.nix
+#    ../yabai.nix
     ../tmux.nix
     ../nvim.nix
-#    ../aerospace.nix
+    ../aerospace.nix
     ../iamb.nix
   ];
 
