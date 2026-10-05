@@ -13,7 +13,11 @@ in
     refind
   ];
 
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
 
@@ -58,7 +62,10 @@ in
 
   programs ={
     dconf.enable = true;
-    hyprland.enable = true;
+    hyprland ={
+      enable = true;
+      xwayland.enable = true;
+    };
     steam.enable = true;
     xwayland.enable = true;
     zsh.enable = true;
@@ -85,6 +92,20 @@ in
           };
         };
       };
+
+    keyd = {
+      enable = true; 
+      keyboards = {
+        default = {
+          ids = [ "*" ]; 
+          settings = {
+            main = {
+              capslock = "leftmeta";
+            };
+          };
+        };
+      };
+    };
 
     avahi = {
       enable = true;

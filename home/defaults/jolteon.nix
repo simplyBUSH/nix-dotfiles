@@ -12,7 +12,6 @@
     ../hyprland.nix
     ../wofi.nix
     ../iamb.nix
-    ../noctalia.nix
   ];
 
   home.username = "bush";
@@ -39,6 +38,7 @@
     ripgrep
     speedtest-cli
     spotify
+    swaybg
     tree
     uv
     vesktop
@@ -47,6 +47,7 @@
   ];
 
   home.pointerCursor = {
+    enable = true;
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
     size = 24;
@@ -55,6 +56,7 @@
 
   gtk = {
     enable = true;
+    gtk4.theme = null;
     theme = {
       name = "Adwaita-dark";
       package = pkgs.adwaita-icon-theme;

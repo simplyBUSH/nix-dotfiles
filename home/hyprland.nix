@@ -3,13 +3,14 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
 
     settings = {
       "$mod" = "SUPER";
+      "$term" = "alacritty";
       monitor = ", preferred, auto, 1";
       exec-once = [ 
-          "swaybg -i /home/bush/wallpaper.png -m fill"
-          "qs -c noctalia-shell"
+          "swaybg -i /home/bush/Pictures/wallpaper.png -m fill"
         ];
       cursor = {
         no_hardware_cursors = true;
@@ -57,8 +58,11 @@
 
       input = {
         follow_mouse = 1;
-        sensitivity = 0;
+        sensitivity = -0.5;
         kb_layout = "pl";
+        repeat_rate = 50;
+
+        repeat_delay = 300;
       };
 
       # Workspace switching
@@ -75,16 +79,16 @@
         "$mod, 0, workspace, 10"
 
         # Move window to workspace
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 0, movetoworkspace, 10"
+        "$mod ALT, 1, movetoworkspace, 1"
+        "$mod ALT, 2, movetoworkspace, 2"
+        "$mod ALT, 3, movetoworkspace, 3"
+        "$mod ALT, 4, movetoworkspace, 4"
+        "$mod ALT, 5, movetoworkspace, 5"
+        "$mod ALT, 6, movetoworkspace, 6"
+        "$mod ALT, 7, movetoworkspace, 7"
+        "$mod ALT, 8, movetoworkspace, 8"
+        "$mod ALT, 9, movetoworkspace, 9"
+        "$mod ALT, 0, movetoworkspace, 10"
 
         # Focus
         "$mod, left, movefocus, l"
@@ -93,23 +97,22 @@
         "$mod, right, movefocus, r"
 
         # Swap
-        "$mod SHIFT, left, swapwindow, l"
-        "$mod SHIFT, right, swapwindow, r"
+        "$mod ALT, left, swapwindow, l"
+        "$mod ALT, right, swapwindow, r"
 
         # Layout
-        "$mod SHIFT, space, togglefloating,"
-        "$mod SHIFT, F, fullscreen,"
+        "$mod ALT, space, togglefloating,"
+        "$mod ALT, F, fullscreen,"
 
         # Apps
-        "$mod SHIFT, C, exec, code"
-        "$mod SHIFT, E, exec, nautilus"
-        "$mod SHIFT, Return, exec, alacritty -e tmux"
-        "$mod SHIFT, M, exec, element-desktop"
-        "$mod SHIFT, R, exec, hyprctl reload"
-        "$mod SHIFT, S, exec, XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
-        "$mod SHIFT, T, exec, env AUTO_TMUX=1 kitty"
-        "$mod SHIFT, V, exec, vesktop"
-        "$mod SHIFT, W, exec, firefox"
+        "$mod, E, exec, nautilus"
+        "$mod, Return, exec, $term"
+        "$mod, M, exec, element-desktop"
+        "$mod, R, exec, hyprctl reload"
+        "$mod, S, exec, XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+        "$mod, T, exec, $term"
+        "$mod, V, exec, vesktop"
+        "$mod, W, exec, firefox"
 
         # Wofi launcher
         "$mod, space, exec, wofi --show drun"
