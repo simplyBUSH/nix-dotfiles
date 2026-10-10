@@ -5,7 +5,11 @@ let
 in
 {
   home-manager.extraSpecialArgs = { inherit accent; };
- # environment.systemPackages = with pkgs; [ ];
+
+  environment.systemPackages = with pkgs; [
+    direnv
+    nix-direnv
+  ];
 
   nix.settings.experimental-features = "nix-command flakes";
   nix.enable = false;
@@ -88,6 +92,7 @@ in
       "dolphin"
       "element"
       "firefox"
+      "gamehub"
       "gimp"
       "karabiner-elements"
       "linearmouse"
@@ -98,14 +103,13 @@ in
       "tailscale-app"
       "vesktop"
       "windows-app"
-      "gamehub"
       # "skim"
 #      "TheBoredTeam/boring-notch/boring-notch"
      ];
     brews = [
 #      "felixkratz/formulae/borders"
       "matthart1983/tap/netwatch"
-      "koekeishiya/formulae/yabai"
+#      "koekeishiya/formulae/yabai"
     ];
   };
 }

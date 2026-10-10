@@ -4,18 +4,13 @@
   imports = [
     ../zsh.nix
     ../git.nix
-#    ../yazi.nix
-#    ../kitty.nix
-    ../alacritty.nix
-#    ../yabai.nix
+    ../yazi.nix
     ../tmux.nix
     ../nvim.nix
-    ../aerospace.nix
-    ../iamb.nix
   ];
 
   home.username = "bush";
-  home.homeDirectory = "/Users/bush";
+  home.homeDirectory = "/home/bush";
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -31,14 +26,13 @@
     hyfetch
     jq
     mosh
-    ollama
-    prismlauncher
     ripgrep
     speedtest-cli
     tree
     uv
     wget
   ];
+
 
   programs.home-manager.enable = true;
 }

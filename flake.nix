@@ -48,6 +48,22 @@
       ];
     };
 
+    nixosConfigurations."espeon" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/espeon
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit inputs; isEevee = false; };
+          home-manager.users.bush = import ./home/defaults/espeon.nix;
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
+    };
+
     homeConfigurations."bush@eevee" = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         system = "aarch64-linux";

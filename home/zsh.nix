@@ -61,10 +61,10 @@ in
 
     initContent = lib.mkMerge [
           (lib.mkIf isDarwin (lib.mkOrder 550 ''
+            eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
             fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
             
           ''))
     ];
-    #            clear && ${pkgs.hyfetch}/bin/hyfetch
   };
 }
